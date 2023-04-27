@@ -18,7 +18,7 @@ export default function Home() {
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
         <Layout>
-          <h1>Ola mundo</h1>
+          <h1>Ola conta</h1>
         </Layout>
       </main>
     </>
