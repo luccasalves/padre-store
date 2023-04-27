@@ -1,9 +1,20 @@
 import Head from "next/head";
-import Image from "next/image";
+
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
-import { Header } from "@/components/header";
 import Layout from "@/layout";
+import {
+  Box,
+  Image,
+  Text,
+  Button,
+  HStack,
+  VStack,
+  Stack,
+  Hide,
+} from "@chakra-ui/react";
+import { Hero } from "@/components/hero";
+import { ButtonLink } from "@/components/button-link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +29,32 @@ export default function Home() {
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
         <Layout>
-          <h1>Ola mundo</h1>
+          <Hero />
+          <HStack
+            px={8}
+            py={4}
+            justifyContent={"space-between"}
+            data-aos="fade-up"
+            data-aos-duration="600"
+            data-aos-anchor-placement="top-bottom"
+            data-aos-delay="400"
+          >
+            <Box>
+              <Text fontSize={"4xl"} as="b" lineHeight={10} textAlign={"start"}>
+                Artigos sobre
+              </Text>
+
+              <HStack gap={10} mt={"4"}>
+                <ButtonLink content="✡️" label="Judaísmo" url="/store" />
+                <ButtonLink content="✝️" label="Cristianismo" url="/store" />
+                <ButtonLink content="☯️" label="Budismo" url="/store" />
+              </HStack>
+            </Box>
+
+            <Text fontSize={"4xl"} as="b" lineHeight={10}>
+              +300k produtos
+            </Text>
+          </HStack>
         </Layout>
       </main>
     </>

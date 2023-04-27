@@ -20,11 +20,13 @@ export function Header() {
       fontWeight={"medium"}
     >
       <HStack justifyContent={"space-between"} p={4} maxW={"1024"} m={"auto"}>
-        <Text>🛐 Padre store</Text>
+        <Link href={"/"}>
+          <Text>🛐 Padre store</Text>
+        </Link>
         <nav>
           <HStack gap={4}>
             <NavLink title="Inicio" url="/" />
-            <NavLink title="Produtos" url="/products" />
+            <NavLink title="Produtos" url="/store" />
             <NavLink title="Account" url="/account" />
           </HStack>
         </nav>
