@@ -34,18 +34,10 @@ export default function Home() {
   function isUserExist() {
     let dbLocal = localStorage.getItem("users");
 
-    if (dbLocal !== null) {
-      console.log(dbLocal);
-      dbLocal = JSON.parse(dbLocal as string);
-      console.log(dbLocal.forE);
-    }
-
     // console.log("Usuário ja existe");
   }
 
   function saveUser() {
-    isUserExist();
-
     let newUser = new User(name, email, password);
 
     users.push(newUser);
