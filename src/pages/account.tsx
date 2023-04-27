@@ -5,9 +5,87 @@ import styles from "@/styles/Home.module.css";
 import { Header } from "@/components/header";
 import Layout from "@/layout";
 
+import {
+  Box,
+  Button,
+  FormControl,
+  FormErrorMessage,
+  FormHelperText,
+  FormLabel,
+  Input,
+  Text,
+} from "@chakra-ui/react";
+import { ChangeEvent, ChangeEventHandler, useState } from "react";
+import { User } from "@/models/user";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const [email, setEmail] = useState<string>("");
+  const [name, setName] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
+  let [isErrorEmail, setIsErrorEmail] = useState(false);
+  let [isErrorName, setIsErrorName] = useState(false);
+  let [isErrorPassword, setIsErrorPassword] = useState(false);
+
+  let users: Array<User> = [];
+
+  function isUserExist() {
+    let dbLocal = localStorage.getItem("users");
+
+    if (dbLocal !== null) {
+      console.log(dbLocal);
+      dbLocal = JSON.parse(dbLocal as string);
+      console.log(dbLocal.forE);
+    }
+
+    // console.log("Usuário ja existe");
+  }
+
+  function saveUser() {
+    isUserExist();
+
+    let newUser = new User(name, email, password);
+
+    users.push(newUser);
+
+    try {
+      localStorage.setItem("users", JSON.stringify(users));
+    } catch (error) {
+      throw new Error("Não foi possível criar o usuário");
+    }
+  }
+
+  function verificationEmptyInput() {
+    if (email.length === 0) {
+      setIsErrorEmail(true);
+      return;
+    }
+
+    if (name.length === 0) {
+      setIsErrorName(true);
+      return;
+    }
+
+    if (password.length === 0) {
+      setIsErrorPassword(true);
+      return;
+    }
+
+    saveUser();
+  }
+
+  function handleEmailInput(e: ChangeEvent<HTMLInputElement>) {
+    setEmail(e.target.value);
+  }
+  function handleNameInput(e: ChangeEvent<HTMLInputElement>) {
+    setName(e.target.value);
+  }
+  function handlePasswordInput(e: ChangeEvent<HTMLInputElement>) {
+    setPassword(e.target.value);
+  }
+
   return (
     <>
       <Head>
@@ -18,7 +96,53 @@ export default function Home() {
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
         <Layout>
-          <h1>Ola conta</h1>
+          <Box maxW={400} margin={"auto"} py={8}>
+            <Text fontSize={"4xl"} as={"b"}>
+              Criar conta
+            </Text>
+            <FormControl isInvalid={isErrorEmail} mt={4}>
+              <FormLabel>Email</FormLabel>
+              <Input type="email" value={email} onChange={handleEmailInput} />
+              {!isErrorEmail ? (
+                ""
+              ) : (
+                <FormErrorMessage>Email is required.</FormErrorMessage>
+              )}
+            </FormControl>
+            <FormControl isInvalid={isErrorName}>
+              <FormLabel>Name</FormLabel>
+              <Input type="text" value={name} onChange={handleNameInput} />
+              {!isErrorName ? (
+                ""
+              ) : (
+                <FormErrorMessage>Name is required.</FormErrorMessage>
+              )}
+            </FormControl>
+            <FormControl isInvalid={isErrorPassword}>
+              <FormLabel>Senha</FormLabel>
+              <Input
+                type="password"
+                value={password}
+                onChange={handlePasswordInput}
+              />
+              {!isErrorPassword ? (
+                ""
+              ) : (
+                <FormErrorMessage>Password is required.</FormErrorMessage>
+              )}
+            </FormControl>
+            <Button
+              bg={"blackAlpha.900"}
+              color={"white"}
+              colorScheme="blackAlpha"
+              type="submit"
+              onClick={verificationEmptyInput}
+              width={"full"}
+              mt={"8"}
+            >
+              Entrar
+            </Button>
+          </Box>
         </Layout>
       </main>
     </>

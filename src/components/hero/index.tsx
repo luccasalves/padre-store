@@ -8,7 +8,7 @@ export function Hero() {
 
   return (
     <Stack
-      height={500}
+      height={400}
       direction="row"
       justifyContent={"space-evenly"}
       alignItems={"center"}
