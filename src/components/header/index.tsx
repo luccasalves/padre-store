@@ -27,7 +27,7 @@ export function Header() {
           <HStack gap={4}>
             <NavLink title="Inicio" url="/" />
             <NavLink title="Produtos" url="/store" />
-            <NavLink title="Account" url="/account" />
+            <NavLink title="Account" url="/auth" />
           </HStack>
         </nav>
       </HStack>

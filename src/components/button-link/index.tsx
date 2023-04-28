@@ -14,7 +14,7 @@ export function ButtonLink({ content, label, url }: Props) {
 
   return (
     <Box onClick={handleClick}>
-      <Button w={100} fontSize={"2xl"}>
+      <Button maxW={100} fontSize={"2xl"}>
         {content}
       </Button>
       <Text textAlign={"center"}>{label}</Text>

@@ -3,16 +3,7 @@ import Head from "next/head";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import Layout from "@/layout";
-import {
-  Box,
-  Image,
-  Text,
-  Button,
-  HStack,
-  VStack,
-  Stack,
-  Hide,
-} from "@chakra-ui/react";
+import { Box, Text, HStack, Stack } from "@chakra-ui/react";
 import { Hero } from "@/components/hero";
 import { ButtonLink } from "@/components/button-link";
 
@@ -30,21 +21,22 @@ export default function Home() {
       <main className={`${styles.main} ${inter.className}`}>
         <Layout>
           <Hero />
-          <HStack
+          <Stack
+            direction={{ base: "column", md: "row" }}
             px={8}
-            py={4}
-            justifyContent={"space-between"}
+            py={12}
+            justifyContent={{ base: "center", md: "space-between" }}
             data-aos="fade-up"
             data-aos-duration="600"
             data-aos-anchor-placement="top-bottom"
             data-aos-delay="400"
           >
-            <Box>
+            <Box mb={8}>
               <Text fontSize={"4xl"} as="b" lineHeight={10} textAlign={"start"}>
                 Artigos sobre
               </Text>
 
-              <HStack gap={10} mt={"4"}>
+              <HStack gap={6} mt={"4"}>
                 <ButtonLink content="✡️" label="Judaísmo" url="/store" />
                 <ButtonLink content="✝️" label="Cristianismo" url="/store" />
                 <ButtonLink content="☯️" label="Budismo" url="/store" />
@@ -54,7 +46,7 @@ export default function Home() {
             <Text fontSize={"4xl"} as="b" lineHeight={10}>
               +300k produtos
             </Text>
-          </HStack>
+          </Stack>
         </Layout>
       </main>
     </>
