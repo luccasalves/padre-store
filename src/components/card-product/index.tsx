@@ -1,26 +1,15 @@
 import { Product } from "@/models/Product";
 import {
-  Box,
   Button,
   ButtonGroup,
   Card,
-  Center,
   Divider,
-  Icon,
   Image,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
   Text,
-  transform,
   useDisclosure,
 } from "@chakra-ui/react";
 import Router from "next/router";
-import { MdShoppingCart } from "react-icons/md";
+import { ModalWarning } from "../modal-card-warning";
 
 interface Props {
   data: Product;
@@ -28,6 +17,7 @@ interface Props {
 
 export function CardProduct({ data }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const payment = useDisclosure();
   let BRL_FORMAT = new Intl.NumberFormat("pt-BR", {
     style: "currency",
     currency: "BRL",
@@ -43,6 +33,17 @@ export function CardProduct({ data }: Props) {
     }
 
     onOpen();
+  }
+  function handlePayment() {
+    let user = localStorage.getItem("ps-current-user");
+
+    if (user) {
+      user = JSON.parse(user);
+      Router.push(`/payment/${data.id}`);
+      return;
+    }
+
+    payment.onOpen();
   }
   return (
     <Card
@@ -60,6 +61,19 @@ export function CardProduct({ data }: Props) {
         mb={4}
         height={"2xs"}
         borderRadius="lg"
+      />
+
+      <ModalWarning
+        isOpen={isOpen}
+        onClose={onClose}
+        color="yellow.200"
+        msg="ADICIONAR o item no carrinho "
+      />
+      <ModalWarning
+        isOpen={payment.isOpen}
+        onClose={payment.onClose}
+        color="blue.400"
+        msg="COMPRAR o item "
       />
 
       <Text as={"b"} textTransform={"capitalize"}>
@@ -82,7 +96,7 @@ export function CardProduct({ data }: Props) {
       <ButtonGroup spacing="2">
         <Button
           onClick={() => {
-            Router.push("/shop");
+            handlePayment();
           }}
           variant="solid"
           colorScheme="blackAlpha"
@@ -94,39 +108,6 @@ export function CardProduct({ data }: Props) {
           + add carrinho
         </Button>
       </ButtonGroup>
-
-      <Modal isOpen={isOpen} onClose={onClose} size={"lg"}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Ação necessária !</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <Center bg={"yellow.200"} p={4}>
-              <Icon as={MdShoppingCart} fontSize={"80"} margin={"auto"} />
-            </Center>
-            <p>
-              Para adicionar o item ao carrinho é necessário possuir uma conta
-              para poder salvar
-            </p>
-          </ModalBody>
-
-          <ModalFooter>
-            <Button
-              onClick={() => {
-                Router.push("/auth");
-              }}
-              colorScheme="blackAlpha"
-              bg={"black"}
-              mr={3}
-            >
-              Criar conta
-            </Button>
-            <Button onClick={onClose} variant="ghost">
-              fechar
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
     </Card>
   );
 }
