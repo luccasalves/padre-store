@@ -1,3 +1,4 @@
+"use client";
 import Head from "next/head";
 
 import { Inter } from "next/font/google";
@@ -8,16 +9,13 @@ import {
   Center,
   Button,
   VStack,
-  Icon,
   Image,
-  HStack,
   Divider,
   Stack,
   useToast,
   Input,
 } from "@chakra-ui/react";
 
-import { BsCashCoin } from "react-icons/bs";
 import Router from "next/router";
 import { ProductList } from "@/data/products";
 
