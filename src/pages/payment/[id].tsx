@@ -16,15 +16,18 @@ import {
   Input,
 } from "@chakra-ui/react";
 
-import Router from "next/router";
+import { useRouter } from "next/router";
 import { ProductList } from "@/data/products";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Payment() {
+function Payment() {
   let idQuery: number;
-  if (Router.query.id) {
-    idQuery = Number(Router.query.id);
+
+  const router = useRouter();
+
+  if (router.query.id) {
+    idQuery = Number(router.query.id);
   }
 
   const data = ProductList.find((item) => item.id == idQuery);
@@ -78,7 +81,7 @@ export default function Payment() {
                   colorScheme="blackAlpha"
                   bg={"black"}
                   onClick={() => {
-                    Router.push("/shop");
+                    router.push("/shop");
                     toast();
                   }}
                 >
@@ -92,3 +95,5 @@ export default function Payment() {
     </>
   );
 }
+
+export default Payment;
