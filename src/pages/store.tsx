@@ -3,11 +3,13 @@ import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import Layout from "@/layout";
-import { Box, Button, HStack, Icon, Text } from "@chakra-ui/react";
+import { Box, Button, HStack, Icon, Stack, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { User } from "@/models/User";
 import { MdShoppingCart, MdLogout } from "react-icons/md";
 import { MenuLogged } from "@/components/menu-logged";
+import { ProductList } from "@/data/products";
+import { CardProduct } from "@/components/card-product";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -42,7 +44,17 @@ export default function Home() {
           {user.username.length > 0 ? (
             <MenuLogged username={user.username} />
           ) : null}
-          <h1>Ola Store</h1>
+          <Stack
+            direction={"row"}
+            flexWrap={"wrap"}
+            gap={4}
+            p={4}
+            justifyContent={"center"}
+          >
+            {ProductList.map((item, index) => (
+              <CardProduct key={index + item.name} data={item} />
+            ))}
+          </Stack>
         </Layout>
       </main>
     </>

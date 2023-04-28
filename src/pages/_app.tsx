@@ -18,7 +18,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <>
         <Header />
         <AnimatePresence mode="wait" initial={false}>
-          <Box maxW={"1024"} m={"auto"}>
+          <Box maxW={"1124"} m={"auto"}>
             <Component {...pageProps} />
           </Box>
         </AnimatePresence>
