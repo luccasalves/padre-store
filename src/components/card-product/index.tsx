@@ -7,6 +7,7 @@ import {
   Image,
   Text,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
 import Router from "next/router";
 import { ModalWarning } from "../modal-card-warning";
@@ -23,12 +24,18 @@ export function CardProduct({ data }: Props) {
     currency: "BRL",
   });
 
+  const toast = useToast({
+    description: "Adicionado ao carrinho",
+    status: "info",
+    position: "top-right",
+  });
+
   function handleAddCart() {
     let user = localStorage.getItem("ps-current-user");
 
     if (user) {
       user = JSON.parse(user);
-
+      toast();
       return;
     }
 

@@ -14,6 +14,7 @@ import {
   Divider,
   Stack,
   useToast,
+  Input,
 } from "@chakra-ui/react";
 
 import { BsCashCoin } from "react-icons/bs";
@@ -72,6 +73,8 @@ export default function Payment() {
                 <Text>{data?.description}</Text>
 
                 <Divider my={4} />
+
+                <Input placeholder="Aplicar cupom" />
 
                 <Button
                   colorScheme="blackAlpha"
