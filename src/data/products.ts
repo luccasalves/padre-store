@@ -4,10 +4,10 @@ export const ProductList: Product[] = [
   {
     id: 1,
     name: "crucifixo",
-    description: "crucifixo de madeira",
+    description: "crucifixo  ornamentado",
     category: "cristianismo",
-    amount: 39.9,
-    installments: 2,
+    amount: 69.9,
+    installments: 3,
     url: "https://images.pexels.com/photos/161281/cross-christian-religion-church-161281.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
   {

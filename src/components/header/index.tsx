@@ -10,6 +10,8 @@ import {
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { NavLink } from "../navlink";
+import { User } from "@/models/User";
+import { useEffect, useState } from "react";
 
 export function Header() {
   return (
@@ -22,7 +24,7 @@ export function Header() {
           <HStack gap={4}>
             <NavLink title="Inicio" url="/" />
             <NavLink title="Produtos" url="/store" />
-            <NavLink title="Account" url="/auth" />
+            <NavLink title={"Conta"} url="/auth" />
           </HStack>
         </nav>
       </HStack>

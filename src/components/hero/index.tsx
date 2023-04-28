@@ -1,7 +1,18 @@
 import { Box, Stack, Text, Button, Hide, Image } from "@chakra-ui/react";
 import Router from "next/router";
+import { CardProduct } from "../card-product";
+import { relative } from "path";
 
 export function Hero() {
+  const product1 = {
+    id: 8,
+    name: "Terço",
+    description: "Terço vermelho",
+    category: "cristianismo",
+    amount: 6.9,
+    installments: 1,
+    url: "https://images.pexels.com/photos/4202956/pexels-photo-4202956.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  };
   function openStore() {
     Router.push("/store");
   }
@@ -45,10 +56,35 @@ export function Hero() {
       </Box>
       <Hide below="md">
         <Image
-          src="/images/cruz.png"
+          src={
+            "https://images.pexels.com/photos/4202956/pexels-photo-4202956.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+          }
           alt="cruz"
           objectFit="cover"
-          w={"300px"}
+          boxSize={"xs"}
+          borderRadius={"md"}
+          position={"relative"}
+          right={"-130px"}
+          bottom={"-20"}
+          boxShadow={"2xl"}
+          transition={"0.2s"}
+          cursor={"pointer"}
+          _hover={{ translate: "-50px -10px" }}
+        />
+        <Image
+          src={
+            "https://images.pexels.com/photos/4040841/pexels-photo-4040841.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+          }
+          alt="cruz"
+          objectFit="cover"
+          boxSize={"xs"}
+          borderRadius={"md"}
+          position={"relative"}
+          right={"40px"}
+          rotate="0.2"
+          transition={"0.2s"}
+          cursor={"pointer"}
+          _hover={{ translate: "-50px -10px" }}
         />
       </Hide>
     </Stack>

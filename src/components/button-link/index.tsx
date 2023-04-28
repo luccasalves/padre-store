@@ -2,7 +2,7 @@ import { Box, Button, Text } from "@chakra-ui/react";
 import Router from "next/router";
 
 interface Props {
-  label: string;
+  label?: string;
   content: string;
   url: string;
 }

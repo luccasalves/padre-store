@@ -25,6 +25,7 @@ export default function Home() {
             direction={{ base: "column", md: "row" }}
             px={8}
             py={12}
+            mt={12}
             justifyContent={{ base: "center", md: "space-between" }}
             data-aos="fade-up"
             data-aos-duration="600"
