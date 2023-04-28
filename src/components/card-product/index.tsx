@@ -80,7 +80,14 @@ export function CardProduct({ data }: Props) {
       </Text>
       <Divider my={4} />
       <ButtonGroup spacing="2">
-        <Button variant="solid" colorScheme="blackAlpha" bg={"black"}>
+        <Button
+          onClick={() => {
+            Router.push("/shop");
+          }}
+          variant="solid"
+          colorScheme="blackAlpha"
+          bg={"black"}
+        >
           Comprar
         </Button>
         <Button variant="outline" colorScheme="blue" onClick={handleAddCart}>
