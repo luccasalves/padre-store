@@ -13,12 +13,7 @@ import { NavLink } from "../navlink";
 
 export function Header() {
   return (
-    <Box
-      bg={"blackAlpha.900"}
-      color={"white"}
-      fontSize={18}
-      fontWeight={"medium"}
-    >
+    <Box bg={"black"} color={"white"} fontSize={18} fontWeight={"medium"}>
       <HStack justifyContent={"space-between"} p={4} maxW={"1024"} m={"auto"}>
         <Link href={"/"}>
           <Text>🛐 Padre store</Text>

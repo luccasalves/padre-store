@@ -2,12 +2,33 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
-import { Header } from "@/components/header";
 import Layout from "@/layout";
+import { Box, Button, HStack, Icon, Text } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { User } from "@/models/User";
+import { MdShoppingCart, MdLogout } from "react-icons/md";
+import { MenuLogged } from "@/components/menu-logged";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const [user, setUser] = useState<User>({
+    id: "",
+    password: "",
+    username: "",
+  });
+
+  useEffect(() => {
+    const userLogged = localStorage.getItem("ps-current-user");
+
+    console.log(userLogged);
+
+    if (userLogged) {
+      const userDb = JSON.parse(userLogged) as User;
+
+      setUser(userDb);
+    }
+  }, []);
   return (
     <>
       <Head>
@@ -18,6 +39,9 @@ export default function Home() {
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
         <Layout>
+          {user.username.length > 0 ? (
+            <MenuLogged username={user.username} />
+          ) : null}
           <h1>Ola Store</h1>
         </Layout>
       </main>

@@ -1,23 +1,16 @@
 import Head from "next/head";
-import Image from "next/image";
+
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
-import { Header } from "@/components/header";
+
 import Layout from "@/layout";
-import { v4 } from "uuid";
+import Router from "next/router";
+import { FormRegister } from "@/components/form-register";
+import { FormLogin } from "@/components/form-login";
 
 import { useEffect, useState, useRef } from "react";
 
-import { Formik, Form, Field, FieldProps } from "formik";
-
 import {
-  Box,
-  Button,
-  FormControl,
-  FormErrorMessage,
-  FormHelperText,
-  FormLabel,
-  Input,
   Tab,
   TabList,
   TabPanel,
@@ -26,27 +19,13 @@ import {
   Text,
   useToast,
 } from "@chakra-ui/react";
-import handler from "./api/users";
-import Router from "next/router";
-import { FormRegister } from "@/components/form-register";
-import { FormLogin } from "@/components/form-login";
+import { User } from "@/models/User";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export interface FormScheme {
   username: string;
   password: string;
-}
-export class User {
-  username: string;
-  password: string;
-  id: string;
-
-  constructor(name: string, pass: string) {
-    this.username = name;
-    this.password = pass;
-    this.id = v4();
-  }
 }
 
 export default function Auth() {
@@ -66,11 +45,29 @@ export default function Auth() {
       status: "error",
       position: "top-right",
     });
+
+    setLoading(false);
+  }
+
+  function showWithoutUserToast() {
+    toast({
+      description: `Usuário não encontrado ou credencias erradas`,
+      status: "warning",
+    });
+
+    setTimeout(() => {
+      toast({
+        description: `Que tal criar uma conta?`,
+        status: "info",
+      });
+    }, 1500);
+    setLoading(false);
   }
 
   async function requestLogin(formData: FormScheme) {
     setLoading(true);
     const db = localStorage.getItem("ps-users");
+
     if (db) {
       const userList = JSON.parse(db) as User[];
 
@@ -93,20 +90,12 @@ export default function Auth() {
 
         return;
       }
+      showWithoutUserToast();
 
-      toast({
-        description: `Usuário não encontrado`,
-        status: "warning",
-      });
-
-      setTimeout(() => {
-        toast({
-          description: `Que tal criar uma conta?`,
-          status: "info",
-        });
-      }, 1500);
-      setLoading(false);
+      return;
     }
+
+    showWithoutUserToast();
   }
 
   async function requestCreateUser(data: FormScheme) {
